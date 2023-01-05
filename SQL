@@ -1,0 +1,6 @@
+DECLARE @startDate DATE = convert(varchar,year(getdate()))+'-'+ convert(varchar,month(getdate()))+'-'+'01'
+DECLARE @endDate DATE= EOMONTH(getdate()) 
+;with Calendar as (
+SELECT [Date] = DATEADD(Day,Number,@startDate)  FROM  master.dbo.spt_values WHERE Type='P' AND DATEADD(day,Number,@startDate) <= @endDate
+)
+select * from Calendar 
